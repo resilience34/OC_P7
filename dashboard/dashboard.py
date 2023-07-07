@@ -1,8 +1,9 @@
 #streamlit run dashboard.py
 
 import streamlit as st
+import matplotlib 
 from matplotlib.figure import Figure
-#import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 import seaborn as sns
 import pandas as pd
 import numpy as np
@@ -125,8 +126,7 @@ if id_client != "":
         st.write("**Age : ** {:.0f}".format(identite_client["AGE"].values[0]), 'ans')
 
         #Age distribution plot
-        fig = Figure()
-        ax = fig.subplots()
+        fig, ax = plt.subplots(figsize=(10, 5))        
         sns.histplot(data_origin["AGE"], color="orchid", bins=20)
         ax.axvline(int(identite_client["AGE"]), color="red", linestyle='dashed')
         ax.set(title='Age des clients', xlabel='Age (ans)', ylabel='')
@@ -146,8 +146,7 @@ if id_client != "":
         df_income = pd.DataFrame(data_origin["AMT_INCOME_TOTAL"])
         df_income = df_income.loc[df_income['AMT_INCOME_TOTAL'] < 200000, :]
         # revenu client distribution plot
-        fig = Figure()
-        ax = fig.subplots()
+        fig, ax = plt.subplots(figsize=(10, 5))
         sns.histplot(df_income["AMT_INCOME_TOTAL"], color="orchid", bins=20)
         ax.axvline(int(identite_client["AMT_INCOME_TOTAL"].values[0]), color="red", linestyle='dashed')
         ax.set(title='Revenu des clients', xlabel='Revenu (USD)', ylabel='')
@@ -214,8 +213,7 @@ if id_client != "":
         st.markdown(original_title, unsafe_allow_html=True)
         feature_imp = pd.DataFrame(sorted(zip(lgbm.booster_.feature_importance(importance_type='gain'), data_clean.columns)), columns=['Value','Feature'])
 
-        fig = Figure()
-        ax = fig.subplots()
+        fig, ax = plt.subplots(figsize=(10, 5))
         sns.barplot(x="Value", y="Feature", data=feature_imp.sort_values(by="Value", ascending=False).head(5))
         ax.set(title='Importance des informations', xlabel='', ylabel='')
         st.pyplot(fig)
