@@ -3,8 +3,6 @@ matplotlib
 seaborn
 pandas
 numpy
-pickle
-zipfile
 lightgbm
 streamlit_echarts
 requests
