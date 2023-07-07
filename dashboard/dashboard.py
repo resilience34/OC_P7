@@ -1,8 +1,8 @@
 #streamlit run dashboard.py
 
 import streamlit as st
-import matplotlib.pyplot as plt
-from matplotlib.pyplot import figure
+from matplotlib.figure import Figure
+#import matplotlib.pyplot as plt
 import seaborn as sns
 import pandas as pd
 import numpy as np
@@ -125,7 +125,8 @@ if id_client != "":
         st.write("**Age : ** {:.0f}".format(identite_client["AGE"].values[0]), 'ans')
 
         #Age distribution plot
-        fig, ax = plt.subplots(figsize=(10, 5))
+        fig = Figure()
+        ax = fig.subplots()
         sns.histplot(data_origin["AGE"], color="orchid", bins=20)
         ax.axvline(int(identite_client["AGE"]), color="red", linestyle='dashed')
         ax.set(title='Age des clients', xlabel='Age (ans)', ylabel='')
@@ -145,7 +146,8 @@ if id_client != "":
         df_income = pd.DataFrame(data_origin["AMT_INCOME_TOTAL"])
         df_income = df_income.loc[df_income['AMT_INCOME_TOTAL'] < 200000, :]
         # revenu client distribution plot
-        fig, ax = plt.subplots(figsize=(10, 5))
+        fig = Figure()
+        ax = fig.subplots()
         sns.histplot(df_income["AMT_INCOME_TOTAL"], color="orchid", bins=20)
         ax.axvline(int(identite_client["AMT_INCOME_TOTAL"].values[0]), color="red", linestyle='dashed')
         ax.set(title='Revenu des clients', xlabel='Revenu (USD)', ylabel='')
@@ -165,12 +167,12 @@ if id_client != "":
         st.text("")
 
 ################# Prédiction via l'API #########################
-        probability_default_payment, prediction = predict_loan_approval(id_client)
+        #probability_default_payment, prediction = predict_loan_approval(id_client)
 
 ################ Prédiction via streamlit#######################        
-        #probability_default_payment, prediction = classify_client(lgbm, id_client, data_clean, seuil)
-        #original_title = '<p style="font-size: 20px;text-align: center;"> <u>Probabilité d\'être en défaut de paiement : </u> </p>'
-        #st.markdown(original_title, unsafe_allow_html=True)
+        probability_default_payment, prediction = classify_client(lgbm, id_client, data_clean, seuil)
+        original_title = '<p style="font-size: 20px;text-align: center;"> <u>Probabilité d\'être en défaut de paiement : </u> </p>'
+        st.markdown(original_title, unsafe_allow_html=True)
 ################################################################
 # mise en place d'un graphique en jauge pour la probabilité d'étre en défaut de paiement 
         options = {
@@ -212,7 +214,8 @@ if id_client != "":
         st.markdown(original_title, unsafe_allow_html=True)
         feature_imp = pd.DataFrame(sorted(zip(lgbm.booster_.feature_importance(importance_type='gain'), data_clean.columns)), columns=['Value','Feature'])
 
-        fig, ax = plt.subplots(figsize=(10, 5))
+        fig = Figure()
+        ax = fig.subplots()
         sns.barplot(x="Value", y="Feature", data=feature_imp.sort_values(by="Value", ascending=False).head(5))
         ax.set(title='Importance des informations', xlabel='', ylabel='')
         st.pyplot(fig)
