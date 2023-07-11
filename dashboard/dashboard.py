@@ -17,11 +17,16 @@ import requests
 
 
 # URL de l'API 
-url_check_id = "http://127.0.0.1:5000/check_id"
-url_identite_client = "http://127.0.0.1:5000/client_id"
-url_predict_client = "http://127.0.0.1:5000/predict"
-url_inf_client = "http://127.0.0.1:5000/inf_client"
+#url_check_id = "http://127.0.0.1:5000/check_id"
+#url_identite_client = "http://127.0.0.1:5000/client_id"
+#url_predict_client = "http://127.0.0.1:5000/predict"
+#url_inf_client = "http://127.0.0.1:5000/inf_client"
 
+
+url_check_id = "https://apiopc-fbf4eb881e94.herokuapp.com/check_id" 
+url_identite_client = " https://apiopc-fbf4eb881e94.herokuapp.com/client_id"
+url_predict_client = " https://apiopc-fbf4eb881e94.herokuapp.com/predict"
+url_inf_client = " https://apiopc-fbf4eb881e94.herokuapp.com/inf_client"
 
 #Configuration application
 # Titre de la page
