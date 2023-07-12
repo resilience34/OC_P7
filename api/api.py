@@ -12,7 +12,7 @@ from zipfile import ZipFile
 from lightgbm import LGBMClassifier
 import json
 import os
-#app = FastAPI()
+
 # Création de l'instance de l'application Flask
 app = Flask(__name__)
 
@@ -37,12 +37,11 @@ def check_id(id_client):
         # Convertir le dictionnaire en JSON
         json_check_id = json.dumps(check_id.to_dict(orient='records'), allow_nan=True)
 
-        #json_check_id = check_id.to_json(orient='records')
         # Renvoyer les données clients
         return json_check_id
 
 
-# Définir une route pour l'identifiant client
+# Définir une route pour les informations client et les autres clients
 @app.route('/client_id/<int:id_client>', methods=['GET']) # GET par défaut 
 def client_id(id_client):
     z = ZipFile("real_data_clean_test.zip")
@@ -51,13 +50,11 @@ def client_id(id_client):
     # id_client en int
     id_client = int(id_client)
     # Sélectionner les données correspondantes à l'id_client
-    #client_id = data_origin[data_origin['SK_ID_CURR'] == id_client] # qui contient uniquement les colonnes à correspond à l'ID client spécifié
+ 
     client_id =  data_origin
     # Transformer le dataset en dictionnaire
     # Convertir le dictionnaire en JSON
     json_client_id = json.dumps(client_id.to_dict(orient='records'), allow_nan=True)
-
-    #json_client_id = client_id.to_json(orient='records')
 
     # Renvoyer les données clients
     return json_client_id
@@ -104,13 +101,9 @@ def inf_client(id_client):
     # Transformer le dataset en json
     # orient='records' réorganise les données du DataFrame 
     # pour les représenter sous forme de dictionnaires dans un tableau JSON
-    #json_inf_client = inf_client.to_json(orient='records')
 
     # Renvoyer les données clients
     return json_inf_client
 
 if __name__ == "__main__":
-    #port = int(os.environ.get('PORT', 8000))  # Récupérer le port à partir de la variable d'environnement PORT, par défaut 5000
-    #uvicorn.run(host='0.0.0.0', port=port)
     app.run(debug=True)
-    #uvicorn.run(app)
