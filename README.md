@@ -33,4 +33,4 @@ Prêt à dépenser décide donc de développer un **dashboard interactif** pour 
     * Procfile* : Fichier necessaire si déploiement sur Heroku de dashboard. Il décrit les processus (dyno) à exécuter lors du lancement de l'application Heroku
     * Requirements.txt : Fichier nécessaire si déploiement sur Heroku du dashboard. Ce fichier contient la liste des packages requis pour le projet.
     * le modèle : modèle pour la prédiction exporté en pickle 
-* **data_drift_analysis.hml** : rapport au format .html de data drift entre les données d'entraînement et les données de "production".
+* **data_drift.hml** : rapport au format .html de data drift entre les données d'entraînement et les données de "production".
