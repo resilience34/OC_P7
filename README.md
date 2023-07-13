@@ -20,7 +20,7 @@ Prêt à dépenser décide donc de développer un **dashboard interactif** pour 
 * Mettre en production le modèle de scoring de prédiction à l’aide d’une API, ainsi que le dashboard interactif qui appelle l’API pour les prédictions.
 
 **Description des dossiers et fichiers dans le dossier OC_P7:**
-* **Notebook preprocessing** : contient le code de la préparation des données, de l'analyse exploratoire.
+* **Notebook preprocessing** : contient le code de la préparation des données et de l'analyse exploratoire.
 * **Notebook model** contient le code de la modélisation.
 * **Dossier API** : dossier contenant les fichiers liés au focntionnement de l'API de prédiction.
     * api.py : fichier API de prédiction réalisée avec flask. Contient les différents endpoints.
